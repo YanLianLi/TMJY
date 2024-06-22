@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络安全协会教务系统</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        .card-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        .card {
+            width: 30%;
+            padding: 20px;
+            margin: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card h2 {
+            margin-bottom: 10px;
+        }
+        .card p {
+            color: #666;
+        }
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>网络安全协会教务系统</h1>
+        <h5>全栈开发：于晓涵</h5>
+    </div>
+    <div class="card-container">
+        <div class="card" onclick="window.location.href='StudentLogin.html'">
+            <h2>学生登录</h2>
+            <p>点击进入学生登录界面</p>
+        </div>
+        <div class="card" onclick="window.location.href='TeacherLogin.html'">
+            <h2>教师登录</h2>
+            <p>点击进入教师登录界面</p>
+        </div>
+        <div class="card" onclick="window.location.href='AdminLogin.html'">
+            <h2>管理员登录</h2>
+            <p>点击进入管理员登录界面</p>
+        </div>
+    </div>
+</div>
+<div style="position: relative;bottom: -80px">
+    <hr>
+    <div align="center">
+        版权所有©盗用必究
+        <br>
+        独立开发者：于晓涵 GitHub: YanLianLi
+    </div>
+</div>
+</body>
+</html>

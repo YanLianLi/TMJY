@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理员登录</title>
+  <!-- 引入Bootstrap样式 -->
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <!-- 自定义CSS样式 -->
+  <style>
+    /* 自定义背景图 */
+    body {
+      background-image: url('resource/images/adminbg.png');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    /* 自定义登陆框样式 */
+    .login-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      padding: 40px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+      animation: fadeInUp 1s ease;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* 自定义标题样式 */
+    .login-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 30px;
+    }
+    /* 自定义按钮样式 */
+    .login-btn {
+      background-color: #007bff;
+      border-color: #007bff;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .login-btn:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    /* 自定义装饰效果 */
+    .decoration {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-blend-mode: overlay;
+      z-index: -1;
+      animation: float 5s infinite ease-in-out;
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="decoration"></div>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-lg-4">
+      <div class="login-container">
+        <h1 class="login-title">管理员登录</h1>
+        <form>
+          <div class="mb-3">
+            <label for="username" class="form-label">用户名</label>
+            <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="请输入密码">
+          </div>
+        </form>
+        <button class="btn btn-primary login-btn" id="btn1">登录</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const btn1 = document.getElementById("btn1")
+  btn1.onclick = function(){
+    const username = document.getElementById("username").value;
+    const pwd = document.getElementById("password").value;
+    const params = {
+      username:username,
+      pwd:pwd
+    }
+    const data = new URLSearchParams()
+    for(const key in params){
+      data.append(key,params[key])
+    }
+    const ajax = new XMLHttpRequest();
+    ajax.open("POST",'/AdminLogin',true)
+    ajax.send(data)
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          alert(ajax.responseText)
+          if(ajax.responseText === "登陆成功"){
+            window.location.href = 'Admin.html'
+          }
+        }
+      }
+    }
+  }
+</script>
+
+</body>
+</html>
+

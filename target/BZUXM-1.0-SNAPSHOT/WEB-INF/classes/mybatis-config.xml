@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <properties resource="db.properties"/><!--版本迭代，可以直接自闭和，引入外部配置文件-->
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--别名接口-->
+    </typeAliases>
+    
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/bzuxm?useSSL=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8" />
+                <property name="username" value="root" />
+                <property name="password" value="15263122182" />
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="MyBatisModel/dao/MapperStudent.xml"/>
+        <mapper resource="MyBatisModel/dao/MapperCourse.xml"/>
+        <mapper resource="MyBatisModel/dao/MapperTeacher.xml"/>
+    </mappers>
+
+</configuration>

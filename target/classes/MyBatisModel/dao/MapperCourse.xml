@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 绑定一个Dao/Mapper的接口-->
+<mapper namespace="MyBatisModel.dao.CourseMapper">
+    <select id="getAllCourse" resultType="MyBatisModel.pojo.SelectCourse">
+        select course.`cname`,course.`cid`,teachers.`tname`
+        from course,teachers
+        where course.`tid` = teachers.`tid`;
+    </select>
+
+    <!--添加课程-->
+    <insert id="addStudentCourse" parameterType="map">
+        INSERT INTO selectcourse (`cid`,`sid`) VALUES (#{cid},#{sid});
+    </insert>
+
+    <!--遍历学生选课表-->
+    <select id="showStudentCourse" parameterType="map" resultType="String">
+        SELECT sid FROM selectcourse WHERE cid = #{cid} AND sid = #{sid}
+    </select>
+
+    <!--查看我的课程-->
+    <select id="ShowMyCourse" resultType="MyBatisModel.pojo.MyCourse" parameterType="String">
+        select course.`cname`,course.`cid`,teachers.`tname`,course.`ctime`
+        from course,teachers,selectcourse
+        where selectcourse.`cid` = course.`cid`
+          and course.`tid`=teachers.`tid`
+          and selectcourse.`sid` = #{sid} ;
+    </select>
+
+    <!--退课-->
+    <delete id="DeletMyCourse" parameterType="map">
+        DELETE FROM selectcourse WHERE `sid` = #{sid} AND `cid` = #{cid};
+    </delete>
+
+    <!--查看成绩-->
+    <select id="ShowGrade" parameterType="String" resultType="MyBatisModel.pojo.MyGrade">
+        SELECT selectcourse.`cid`,course.`cname`,selectcourse.`grade`
+        FROM selectcourse,course
+        WHERE selectcourse.`cid`=course.`cid`
+          AND selectcourse.`sid` = #{sid}
+          AND selectcourse.`grade` IS NOT NULL;
+    </select>
+    <!--老师添加课程-->
+    <insert id="InertCourse" parameterType="map">
+        insert into course values (#{cid},#{cname},#{tid},#{ctime})
+    </insert>
+    <!--列出所有学生选择该老师的课程-->
+    <select id="TeacherCourse" parameterType="String" resultType="MyBatisModel.pojo.GetTeacherGrade">
+        select students.`sid`,students.`sname`,course.`cname`,course.`cid`
+        from students,course,selectcourse
+        where selectcourse.`cid`=course.`cid`
+          and students.`sid`=selectcourse.`sid`
+          and course.`tid` = #{tid}
+          and selectcourse.`grade` is null;
+    </select>
+    <!--老师添加学生的成绩-->
+    <update id="TeacherInsertGrade" parameterType="map">
+        update selectcourse set grade = #{grade} where cid = #{cid} and sid = #{sid}
+    </update>
+    <!--查询老师课程安排-->
+    <select id="ShowTeacherCourse" parameterType="String" resultType="MyBatisModel.pojo.TeacherCourse">
+        SELECT course.`cname` AS cname,course.`cid` AS cid,COUNT(selectcourse.`sid`) AS persons
+        FROM course
+                 INNER JOIN selectcourse
+                            ON course.`cid` = selectcourse.`cid` AND course.`tid` = #{tid}
+        GROUP BY selectcourse.`cid`;
+    </select>
+</mapper>

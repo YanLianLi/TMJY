@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生端</title>
+  <link href="lib/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .sidebar {
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      padding-top: 3.5rem;
+      background-color: #f8f9fa;
+    }
+    .profile {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    main {
+      margin-left: 14rem;
+    }
+    .nav-link {
+      color: #333;
+      transition: all 0.3s;
+      text-decoration: none;
+      padding: 10px 15px;
+      display: block;
+      font-size: 18px;
+    }
+    .nav-link:hover {
+      background-color: #007bff;
+      color: #fff;
+      border-radius: 4px;
+    }
+    .course-card {
+      width: 30%;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+
+    .custom-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+
+  <div class="row">
+    <!-- 触发事件 -->
+    <nav class="col-md-2 d-none d-md-block sidebar">
+      <div class="profile">
+        <img src="resource/images/头像.jpg" alt="Avatar">
+        <h2 id="statename"> </h2>
+      </div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showContent('credits')" id="top1">个人信息</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="showContent('grades')" id="top2">查看成绩</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="top3">选课</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="top4">我的课程</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- 容器 -->
+    <main class="col-md-10">
+      <div id="content-credits" class="container mt-4" style="display: none;">
+        <h2>个人信息</h2>
+        <div class="row mt-3">
+          <div class="col-md-4 text-center">
+            <img src="resource/images/头像.jpg" class="img-fluid rounded-circle" alt="Your Photo" style="max-width: 200px; border: 2px solid #ccc;">
+          </div>
+          <div class="col-md-8">
+            <ul style="list-style: none; padding: 0;">
+              <li style="background-color: #007bff; color: #fff; font-weight: bold; padding: 5px 10px; margin-bottom: 10px;" id="xinxi1"></li>
+              <li style="background-color: #007bff; color: #fff; font-weight: bold; padding: 5px 10px; margin-bottom: 10px;" id="xinxi2"></li>
+              <li style="background-color: #007bff; color: #fff; font-weight: bold; padding: 5px 10px; margin-bottom: 10px;" id="xinxi3"></li>
+              <li style="background-color: #007bff; color: #fff; font-weight: bold; padding: 5px 10px; margin-bottom: 10px;" id="xinxi4"></li>
+              <li style="background-color: #007bff; color: #fff; font-weight: bold; padding: 5px 10px; margin-bottom: 10px;" id="xinxi5"></li>
+            </ul>
+          </div>
+        </div>
+        <div style="position: relative;bottom: -600px">
+          <hr>
+          <div align="center">
+            版权所有©盗用必究
+            <br>
+            独立开发者：于晓涵 GitHub: YanLianLi
+          </div>
+        </div>
+      </div>
+      <div id="content-grades" class="container mt-4">
+        <h2>本学期成绩查看</h2>
+        <h2 style="text-align: center; margin-bottom: 20px;">您的成绩如下</h2>
+        <div class="table-responsive" style="border-radius: 10px; overflow: hidden;">
+          <table class="table table-bordered table-hover" style="border-radius: 10px; overflow: hidden;" id="parent-table">
+            <thead>
+            <tr>
+              <th style="background-color: #007bff; color: #fff; border: none;">课程</th>
+              <th style="background-color: #007bff; color: #fff; border: none;">成绩</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+        <div style="position: relative;bottom: -600px">
+          <hr>
+          <div align="center">
+            版权所有©盗用必究
+            <br>
+            独立开发者：于晓涵 GitHub: YanLianLi
+          </div>
+        </div>
+      </div>
+
+      <div id="content-courses" class="container mt-4" style="display: none;">
+        <h2 style="text-align: center; margin-bottom: 20px;">选择课程</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-around;" id="kc">
+
+        </div>
+        <div style="position: relative;bottom: -600px">
+          <hr>
+          <div align="center">
+            版权所有©盗用必究
+            <br>
+            独立开发者：于晓涵 GitHub: YanLianLi
+          </div>
+        </div>
+      </div>
+      <div id="content-schedule" class="container mt-4" style="display: none;">
+        <h2 style="text-align: center; margin-bottom: 20px;">我的课程</h2>
+        <div id="mykc">
+
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    //状态
+    const name = document.getElementById("statename")
+    const ajax = new XMLHttpRequest();
+    ajax.open('GET','/Sstate',true)
+    ajax.send()
+    ajax.onreadystatechange = function (){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          name.innerText = ajax.responseText
+        }
+      }
+    }
+
+    //个人信息
+    const ajax2 = new XMLHttpRequest()
+    const sid = document.getElementById("xinxi1")
+    const sname = document.getElementById("xinxi2")
+    const ssex = document.getElementById("xinxi3")
+    const birth = document.getElementById("xinxi4")
+    const add = document.getElementById("xinxi5")
+    ajax2.open('GET','/SInfo',true)
+    ajax2.send()
+    ajax2.onreadystatechange = function (){
+      if(ajax2.readyState === 4){
+        if(ajax2.status/100 === 2){
+          const data = JSON.parse(ajax2.responseText);//解析json数据
+          data.forEach(function (student){
+            sid.innerText = "学号："+student.sid;
+            sname.innerText = "姓名："+student.sname;
+            ssex.innerText = "性别："+student.ssex;
+            birth.innerText = "出生日期："+student.birth;
+            add.innerText = "家庭住址："+student.address;
+          })
+          console.log("JSON请求成功！")
+        }
+      }
+    }
+
+    //我的成绩
+    const ajax6 = new XMLHttpRequest();
+    ajax6.open('POST','/Getgrade',true);
+    ajax6.send();
+    ajax6.onreadystatechange = function(){
+      if(ajax6.readyState === 4){
+        if(ajax6.status/100 === 2){
+          const data = JSON.parse(ajax6.responseText)
+          data.forEach(function(sc){
+            var tr = document.createElement('tr');
+
+            var courseTd = document.createElement('td');
+            courseTd.textContent = sc.cname;
+            courseTd.style.border = '1px solid #dee2e6'; // 添加边框样式
+            // courseTd.style.padding = '8px'; // 添加内边距
+            tr.appendChild(courseTd);
+
+            var gradeTd = document.createElement('td');
+            var gradeSpan = document.createElement('span');
+            gradeSpan.style.color = '#28a745';
+            gradeSpan.textContent = sc.grade;
+            gradeTd.appendChild(gradeSpan);
+            gradeTd.style.border = '1px solid #dee2e6'; // 添加边框样式
+            // gradeTd.style.padding = '8px'; // 添加内边距
+            tr.appendChild(gradeTd);
+
+// 将新创建的<tr>元素添加到父容器的最后
+            document.getElementById('parent-table').appendChild(tr);
+          })
+        }
+      }
+    }
+
+
+    console.log('页面加载完毕！');
+  });
+
+  //添加点击刷新事件
+  const top3 = document.getElementById("top3")
+  top3.onclick = function(){
+    document.getElementById('kc').innerHTML = '';
+    //所有课程
+    const ajax3 = new XMLHttpRequest()
+    const kc = document.getElementById("kc")
+    ajax3.open('GET','/GCourse',true)
+    ajax3.send()
+    ajax3.onreadystatechange = function(){
+      if(ajax3.readyState === 4){
+        if(ajax3.status/100 === 2){
+          const data = JSON.parse(ajax3.responseText)
+          data.forEach(function (sc){
+            const courseCard = document.createElement('div');
+            courseCard.className = 'course-card';
+            courseCard.innerHTML = `
+        <h3>${sc.cname}</h3>
+        <p>${sc.cid}</p>
+        <p>${sc.tname}</p>
+        <button class="custom-button">选择课程</button>
+    `
+            kc.appendChild(courseCard)
+          })
+        }
+      }
+    }
+    showContent('courses')
+  }
+
+  //top4点击刷新事件
+  const top4 = document.getElementById("top4")
+  top4.onclick = function(){
+    document.getElementById('mykc').innerHTML = '';
+    //我选择的课程
+    const ajax5 = new XMLHttpRequest();
+    ajax5.open('GET','/GetMyCourse',true)
+    ajax5.send()
+    ajax5.onreadystatechange = function (){
+      if(ajax5.readyState === 4){
+        if(ajax5.status/100 === 2){
+          const data = JSON.parse(ajax5.responseText)
+          data.forEach(function(sc){
+            //添加至父容器
+            var bigDiv = document.createElement('div');
+            var cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+
+            var cardBodyDiv = document.createElement('div');
+            cardBodyDiv.className = 'card-body d-flex justify-content-between align-items-center';
+
+            var courseInfoDiv = document.createElement('div');
+            var courseNameHeading = document.createElement('h5');
+            courseNameHeading.className = 'card-title';
+            courseNameHeading.textContent = sc.cname;
+            var courseNumberParagraph = document.createElement('p');
+            courseNumberParagraph.className = 'card-text';
+            courseNumberParagraph.textContent = '课程号: ' + sc.cid;
+            var teacherParagraph = document.createElement('p');
+            teacherParagraph.className = 'card-text';
+            teacherParagraph.textContent = '任课老师: ' + sc.tname;
+            var classTimeParagraph = document.createElement('p');
+            classTimeParagraph.className = 'card-text';
+            classTimeParagraph.textContent = '开课时间: ' + sc.ctime;
+
+            courseInfoDiv.appendChild(courseNameHeading);
+            courseInfoDiv.appendChild(courseNumberParagraph);
+            courseInfoDiv.appendChild(teacherParagraph);
+            courseInfoDiv.appendChild(classTimeParagraph);
+
+            var cancelButton = document.createElement('button');
+            cancelButton.type = 'button';
+            cancelButton.className = 'btn btn-sm btn-outline-danger ml-auto'; // 使用 ml-auto 类来将按钮推到右边
+            cancelButton.textContent = '退课';
+
+            cardBodyDiv.appendChild(courseInfoDiv);
+            cardBodyDiv.appendChild(cancelButton);
+
+            cardDiv.appendChild(cardBodyDiv);
+            bigDiv.appendChild(cardDiv);
+            bigDiv.appendChild(document.createElement('br'));
+
+            // 将新创建的卡片添加到父容器的最后
+            document.getElementById('mykc').appendChild(bigDiv);
+          })
+        }
+      }
+    }
+    showContent('schedule')
+  }
+
+  document.addEventListener('click',function (event){
+    //选课
+    const ajax4 = new XMLHttpRequest()
+    if(event.target.classList.contains('custom-button')){
+      const Card = event.target.closest('.course-card')
+      const cname= Card.querySelector('h3').textContent
+      const cid = Card.querySelector('p:nth-child(2)').textContent
+      const cteacher = Card.querySelector('p:nth-child(3)').textContent
+      alert("请核对您的选课信息："+"\n"+"课程名称："+cname+"\n"+"课程号："+cid+"\n"+"任课教师："+cteacher);
+
+
+      const params = {
+        cid:cid,
+        cname:cname,
+        cteacher:cteacher
+      }
+      const date = new URLSearchParams();
+      for(const key in params){
+        date.append(key,params[key])
+      }
+
+      ajax4.open('POST','/StuSelectcourse',true)
+      ajax4.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+      ajax4.send(date);
+
+      ajax4.onreadystatechange = function(){
+        if(ajax4.readyState === 4){
+          if(ajax4.status/100 === 2){
+            alert(ajax4.responseText)
+          }
+        }
+      }
+    }
+
+    //退课
+    const ajax5 = new XMLHttpRequest()
+    if (event.target && event.target.nodeName === 'BUTTON' && event.target.textContent === '退课'){
+      var courseCard = event.target.closest('.card');
+      var courseName = courseCard.querySelector('.card-title').textContent;
+      var courseId = courseCard.querySelector('.card-text').textContent.replace('课程号: ', '');
+      alert("请确认您退课的课程号："+courseId+"\n"+"课程名称："+courseName)
+      const params  = {
+        cid:courseId,
+        cname:courseName
+      }
+      const date = new URLSearchParams();
+      for(const key in params){
+        date.append(key,params[key])
+      }
+      ajax5.open('POST','/DeletMyCourse',true)
+      ajax5.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+      ajax5.send(date)
+      ajax5.onreadystatechange = function(){
+        if(ajax5.readyState === 4){
+          if(ajax5.status/100 === 2){
+            alert(ajax5.responseText)
+            local.reload()
+          }
+        }
+      }
+    }
+  })
+
+  function showContent(id) {
+    var contents = document.querySelectorAll('[id^="content-"]');
+    for (var i = 0; i < contents.length; i++) {
+      contents[i].style.display = 'none';
+    }
+    document.getElementById('content-' + id).style.display = 'block';
+  }
+</script>
+<script src="lib/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教师登陆</title>
+  <!-- 引入Bootstrap样式 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .login-container {
+      max-width: 400px;
+      margin: 0 auto;
+      margin-top: 100px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease;
+    }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .btn-primary {
+      transition: all 0.3s ease;
+    }
+    .btn-primary:hover {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="login-container">
+    <h2 class="text-center mb-4">教师登陆</h2>
+    <form>
+      <div class="mb-3">
+        <label for="username" class="form-label">用户名</label>
+        <input type="text" class="form-control" id="username" placeholder="Enter your username">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">密码</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your password">
+      </div>
+    </form>
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary" id="btn1">提交</button>
+    </div>
+  </div>
+</div>
+
+<div style="position: relative;bottom: -250px">
+  <hr>
+  <div align="center">
+    版权所有©盗用必究
+    <br>
+    独立开发者：于晓涵 GitHub: YanLianLi
+  </div>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const btn1 = document.getElementById("btn1")
+  btn1.onclick = function(){
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const ajax = new XMLHttpRequest()
+    const params = {
+      tid:username,
+      pwd:password
+    }
+    const data = new URLSearchParams()
+    for(const key in params){
+      data.append(key,params[key])
+    }
+    ajax.open('POST','/TLogin',true)
+    ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+    ajax.send(data)
+
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          alert(ajax.responseText)
+          if(ajax.responseText === "登陆成功！"){
+            window.location.href = "Teacher.html"
+          }
+        }
+      }
+    }
+  }
+</script>
+</body>
+</html>
+

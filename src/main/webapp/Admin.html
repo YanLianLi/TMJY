@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>管理员系统</title>
+  <link href="lib/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/all.min.css" integrity="sha512-kvXpJxbnWYb4p2lz1ch2tzkecbXy1rGQmVVc81MekxdHz2AzICxY0DOuzhKJ3dNJlpMkRLY7L4O5GbkxQFQOFA==" crossorigin="anonymous" />
+  <style>
+    body {
+      background-color: #f4f7f6;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+    }
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      background-color: #fff;
+      padding: 20px;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    .btn-primary {
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      transition-duration: 0.4s;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .btn-primary:hover {
+      background-color: #45a049;
+    }
+    .btn-action {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center mb-4" style="color: #4CAF50;">管理员系统</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card p-4 mb-4">
+        <h2 class="text-center mb-4" style="color: #4CAF50;">教师管理</h2>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#ShowTeacherModal" id="showTeacher"> 查看教师列表</button>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#addTeacherModal" id="addTeacher"> 添加新教师</button>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#DeletTeacherModal">删除教师信息</button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="text-center mb-4" style="color: #4CAF50;">学生管理</h2>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#ShowStudentModal" id="showStudent"> 查看学生列表</button>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#addStudentModal"> 添加新学生</button>
+        <button class="btn-primary btn-action" data-bs-toggle="modal" data-bs-target="#DeletStudentModal"> 删除学生信息</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--弹窗模态框部分-->
+<!--添加教师-->
+<div class="modal fade" id="addTeacherModal" tabindex="-1" aria-labelledby="addTeacherModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addTeacherModalLabel">添加新教师</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="tid" class="form-label">教职工号</label>
+            <input type="text" class="form-control" id="tid" placeholder="请输入教职工号">
+          </div>
+          <div class="mb-3">
+            <label for="tname" class="form-label">教师姓名</label>
+            <input type="text" class="form-control" id="tname" placeholder="请输入教师姓名">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">性别</label>
+            <br>
+            <input type="radio" name="tsex" value="male"> 男 <input type="radio" name="tsex" value="female"> 女
+          </div>
+          <div class="mb-3">
+            <label for="tbirth" class="form-label">出生日期</label>
+            <input type="date" class="form-control" id="tbirth" placeholder="请输入出生日期">
+          </div>
+          <div class="mb-3">
+            <label for="taddress" class="form-label">家庭住址</label>
+            <input type="text" class="form-control" id="taddress" placeholder="请输入家庭住址">
+          </div>
+          <div class="mb-3">
+            <label for="tpwd" class="form-label">登陆密码</label>
+            <input type="text" class="form-control" id="tpwd" placeholder="请输入登陆密码">
+          </div>
+        </form>
+        <button class="btn btn-primary" id="btnt1">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--查看教师-->
+<div class="modal fade" id="ShowTeacherModal" tabindex="-1" aria-labelledby="ShowTeacherModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ShowTeacherModalLabel">查看教师列表</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="teacherList">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>工号</th>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>生日</th>
+              <th>住址</th>
+            </tr>
+            </thead>
+            <tbody id="tfather">
+            <!-- 教师信息行 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--删除教师-->
+<div class="modal fade" id="DeletTeacherModal" tabindex="-1" aria-labelledby="DeletTeacherModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeletTeacherModalLabel">删除教师</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="dtid" class="form-label">教职工号</label>
+          <input type="text" class="form-control" id="dtid" placeholder="请输入教职工号">
+          <label for="season" class="form-label">删除原因</label>
+          <br>
+          <textarea id="season" class="form-text" rows="5" cols="50"></textarea>
+        </div>
+        <button class="btn btn-primary" id="deleteteacher">提交</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--查看学生-->
+<div class="modal fade" id="ShowStudentModal" tabindex="-1" aria-labelledby="ShowStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ShowStudentModalLabel">查看学生列表</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div id="StudentList">
+          <table class="table table-striped" >
+            <thead>
+            <tr>
+              <th>学号</th>
+              <th>姓名</th>
+              <th>性别</th>
+              <th>生日</th>
+              <th>住址</th>
+            </tr>
+            </thead>
+            <tbody id="sfather">
+            <!-- 教师信息行 -->
+            <!-- 添加更多教师信息行 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--添加新学生-->
+<div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addStudentModalLabel">添加新学生</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="sid" class="form-label">学号</label>
+            <input type="text" class="form-control" id="sid" placeholder="请输入学号">
+          </div>
+          <div class="mb-3">
+            <label for="sname" class="form-label">学生姓名</label>
+            <input type="text" class="form-control" id="sname" placeholder="请输入学生姓名">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">性别</label>
+            <br>
+            <input type="radio" id="ssex" name="sex" value="male"> 男 <input type="radio" id="ssex1" name="sex" value="female"> 女
+          </div>
+          <div class="mb-3">
+            <label for="sbirth" class="form-label">出生日期</label>
+            <input type="date" class="form-control" id="sbirth" placeholder="请输入出生日期">
+          </div>
+          <div class="mb-3">
+            <label for="saddress" class="form-label">家庭住址</label>
+            <input type="text" class="form-control" id="saddress" placeholder="请输入家庭住址">
+          </div>
+          <div class="mb-3">
+            <label for="spwd" class="form-label">登陆密码</label>
+            <input type="text" class="form-control" id="spwd" placeholder="请输入登陆密码">
+          </div>
+
+        </form>
+        <button class="btn btn-primary" id="addStudent">提交</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--删除学生-->
+<div class="modal fade" id="DeletStudentModal" tabindex="-1" aria-labelledby="DeletStudentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="DeletStudentModalLabel">删除教师</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="dsid" class="form-label">教职工号</label>
+          <input type="text" class="form-control" id="dsid" placeholder="请输入教职工号">
+          <label for="season" class="form-label">删除原因</label>
+          <br>
+          <textarea id="sseason" class="form-text" rows="5" cols="50"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary">提交</button>
+    </div>
+  </div>
+</div>
+
+<script src="lib/bootstrap.bundle.min.js"></script>
+
+<script>
+  //查看所有教师
+  let btn1 = document.getElementById("showTeacher");
+  btn1.onclick = function(){
+    let father = document.getElementById("tfather")
+    father.innerHTML = ' ';
+    let ajax = new XMLHttpRequest()
+    ajax.open('GET','/ShowTeachers',true);
+    ajax.send();
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          const data = JSON.parse(ajax.responseText)
+          data.forEach(function(sc){
+            var tr = document.createElement('tr');
+
+// 创建<td>元素
+            var td1 = document.createElement('td');
+            td1.textContent = sc.tid;
+            tr.appendChild(td1);
+
+            var td2 = document.createElement('td');
+            td2.textContent = sc.tname;
+            tr.appendChild(td2);
+
+            var td3 = document.createElement('td');
+            td3.textContent = sc.tsex;
+            tr.appendChild(td3);
+
+            var td4 = document.createElement('td');
+            td4.textContent = sc.tbirth;
+            tr.appendChild(td4);
+
+            var td5 = document.createElement('td');
+            td5.textContent = sc.address;
+            tr.appendChild(td5);
+
+            father.appendChild(tr)
+          })
+        }
+      }
+    }
+  }
+  //添加教师
+  let btn2 = document.getElementById("btnt1")
+  btn2.onclick = function(){
+    let tid = document.getElementById("tid").value;
+    let tname = document.getElementById("tname").value;
+    let  taddress = document.getElementById("taddress").value;
+    let tbirth = document.getElementById("tbirth").value;
+    let tpwd = document.getElementById("tpwd").value;
+    let sex;
+    var selectedValue = document.querySelector('input[name="tsex"]:checked').value;
+// 根据选中的值进行对应的操作
+    if (selectedValue === 'male') {
+      console.log('选中了男性');
+      sex = '男'
+    } else if (selectedValue === 'female') {
+      console.log('选中了女性');
+      sex = '女'
+    }
+
+    let params = {
+      tid:tid,
+      tname:tname,
+      tsex:sex,
+      tbirth:tbirth,
+      taddress:taddress,
+      tpwd:tpwd
+    }
+    let data = new URLSearchParams();
+    for(let key in params){
+      data.append(key,params[key])
+    }
+    let ajax = new XMLHttpRequest()
+    ajax.open('POST','/InsertTeacher',true)
+    ajax.send(data)
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          alert(ajax.responseText)
+        }
+      }
+    }
+  }
+  //删除教师
+  let btn3 = document.getElementById("deleteteacher")
+  btn3.onclick = function(){
+    alert("注意，此操作会删除该教师所有信息以及创建的课程！请谨慎使用！")
+    let tid = document.getElementById("dtid").value;
+    alert(tid)
+    let ajax = new XMLHttpRequest();
+    let data = new URLSearchParams();
+    data.append("tid",tid);
+    ajax.open('POST','/DeleteTeacher',true)
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          alert(ajax.responseText)
+        }
+      }
+    }
+    ajax.send(data);
+  }
+
+
+  //学生部分
+  //查询同学
+  let btn10 = document.getElementById("showStudent");
+  let father1 = document.getElementById("sfather")
+  btn10.onclick = function(){
+    father1.innerHTML = " "
+    let ajax = new XMLHttpRequest()
+    ajax.open('GET','/ShowStudents',true)
+    ajax.send()
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          let data = JSON.parse(ajax.responseText)
+          data.forEach(function(sc){
+            var tr = document.createElement('tr');
+
+// 创建<td>元素
+            var td1 = document.createElement('td');
+            td1.textContent = sc.sid;
+            tr.appendChild(td1);
+
+            var td2 = document.createElement('td');
+            td2.textContent = sc.sname;
+            tr.appendChild(td2);
+
+            var td3 = document.createElement('td');
+            td3.textContent = sc.ssex;
+            tr.appendChild(td3);
+
+            var td4 = document.createElement('td');
+            td4.textContent = sc.birth;
+            tr.appendChild(td4);
+
+            var td5 = document.createElement('td');
+            td5.textContent = sc.address;
+            tr.appendChild(td5);
+
+            father1.appendChild(tr)
+          })
+        }
+      }
+    }
+  }
+
+  //添加同学
+  let btn11 = document.getElementById("addStudent")
+  btn11.onclick = function(){
+    const sid = document.getElementById("sid").value;
+    const sname = document.getElementById("sname").value;
+    const sbirth = document.getElementById("sbirth").value;
+    const saddress = document.getElementById("saddress").value;
+    const spwd = document.getElementById("spwd").value;
+
+    var selectedValue = document.querySelector('input[name="sex"]:checked').value;
+    let ssex;
+    if (selectedValue === 'male') {
+      console.log('选中了男性');
+      ssex = '男'
+    } else if (selectedValue === 'female') {
+      console.log('选中了女性');
+      ssex = '女'
+    }
+
+    let params = {
+      sid:sid,
+      sname:sname,
+      sbirth:sbirth,
+      saddress:saddress,
+      spwd:spwd,
+      ssex:ssex
+    }
+    let data = new URLSearchParams()
+    for(let key in params){
+      data.append(key,params[key])
+    }
+    let ajax2 = new XMLHttpRequest();
+    ajax2.open('POST','/InsertStudent',true)
+    ajax2.send(data)
+    ajax2.onreadystatechange = function(){
+      if(ajax2.readyState === 4){
+        if(ajax2.status/100 === 2){
+          alert(ajax2.responseText)
+        }
+      }
+    }
+  }
+
+</script>
+
+
+
+</body>
+</html>
+
+

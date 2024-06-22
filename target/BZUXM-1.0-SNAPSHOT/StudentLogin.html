@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>学生登陆界面</title>
+  <link href="lib/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #cfe2f3;
+      padding: 50px 0;
+    }
+    .login-container {
+      margin-top: 50px;
+      animation: slide-in 0.5s ease forwards;
+      opacity: 0;
+      padding: 50px;
+    }
+    @keyframes slide-in {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+    }
+    .card-header {
+      background-color: #343a40;
+      color: #fff;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .form-control {
+      border: none;
+      border-bottom: 1px solid #ced4da;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    .form-control:focus {
+      border-color: #007bff;
+      box-shadow: none;
+    }
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+    .social-login {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .social-login-btn {
+      margin-right: 10px;
+    }
+    .qr-code-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 login-container">
+      <div class="card">
+        <div class="card-header text-center">学生登陆</div>
+        <div class="card-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="username" class="form-label">用户名</label>
+              <input type="text" class="form-control" id="username" placeholder="请输入用户名">
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">密码</label>
+              <input type="password" class="form-control" id="password" placeholder="请输入密码">
+            </div>
+          </form>
+          <button class="btn btn-primary w-100" id="btn1">登陆</button>
+          <div class="social-login">
+            <button class="btn btn-light social-login-btn" id="wechatBtn"><img src="resource/images/WechatIcan.png" alt="微信图标" style="width: 50px;height: 40px"> 微信登陆</button>
+            <button class="btn btn-light social-login-btn" id="qqBtn"><img src="resource/images/QQIcan.png" alt="QQ图标" style="width: 40px;height: 40px"> QQ登陆</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WeChat Modal -->
+<div class="modal fade" id="wechatModal" tabindex="-1" aria-labelledby="wechatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="wechatModalLabel">微信登陆</h5>
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+      </div>
+      <br>
+      <span>不是哥们，真微信登陆啊？</span>
+      <br>
+      <strong>家人们, 9块9上车微信登陆，把上车打在公屏上！</strong>
+      <div class="modal-body text-center">
+        <img src="resource/images/不是哥们？.jpg" alt="微信二维码" style="width: 200px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QQ Modal -->
+<div class="modal fade" id="qqModal" tabindex="-1" aria-labelledby="qqModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="qqModalLabel">QQ登陆</h5>
+<!--        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+      </div>
+      <br>
+      <span>体谅下写全栈的程序猿吧，干嘛非要QQ登陆嘞，调接口的钱拿去吃顿火锅不香嘛</span>
+      <br>
+      <strong>再点让你们飞起来！</strong>
+      <div class="modal-body text-center">
+        <img src="resource/images/黑手.jpg" alt="QQ二维码" style="width: 200px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="position: relative;bottom: -300px">
+  <hr>
+  <div align="center">
+    版权所有©盗用必究
+    <br>
+    独立开发者：于晓涵 GitHub: YanLianLi
+  </div>
+</div>
+
+<script src="lib/bootstrap.bundle.min.js"></script>
+<script>
+  const btnlogin = document.getElementById("btn1");
+  btnlogin.onclick = function(){
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const ajax = new XMLHttpRequest();
+
+    const param = {//打包数据
+      username:username,
+      password:password
+    }
+    const formData = new URLSearchParams()
+    for(const key in param){//转化为URL格式
+      formData.append(key,param[key])
+    }
+
+    ajax.open('POST','/Slogin',true);
+    ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
+    ajax.send(formData)
+
+    ajax.onreadystatechange = function(){
+      if(ajax.readyState === 4){
+        if(ajax.status/100 === 2){
+          alert(ajax.responseText)
+          if(ajax.responseText === "欢迎同学"){
+            window.location.href = "Student.html"
+          }
+        }
+      }
+    }
+  }
+
+
+  //微信登陆按钮动作
+  document.getElementById('wechatBtn').addEventListener('click', function() {
+    var wechatModal = new bootstrap.Modal(document.getElementById('wechatModal'));
+    wechatModal.show();
+  });
+
+  //QQ登陆按钮动作
+  document.getElementById('qqBtn').addEventListener('click', function() {
+    var qqModal = new bootstrap.Modal(document.getElementById('qqModal'));
+    qqModal.show();
+  });
+</script>
+
+</body>
+</html>
+
+

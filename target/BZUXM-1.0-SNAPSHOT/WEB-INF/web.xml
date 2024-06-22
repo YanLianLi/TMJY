@@ -1,0 +1,196 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <servlet>
+    <servlet-name>test</servlet-name>
+    <servlet-class>contaller.test</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>test</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Slogin</servlet-name>
+    <servlet-class>contaller.Student.StudentLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Slogin</servlet-name>
+    <url-pattern>/Slogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Sstate</servlet-name>
+    <servlet-class>contaller.Student.StudentState</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Sstate</servlet-name>
+    <url-pattern>/Sstate</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>SInfo</servlet-name>
+    <servlet-class>contaller.Student.StudentInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SInfo</servlet-name>
+    <url-pattern>/SInfo</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GCourse</servlet-name>
+    <servlet-class>contaller.Course.getCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GCourse</servlet-name>
+    <url-pattern>/GCourse</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>StuSelectcourse</servlet-name>
+    <servlet-class>contaller.Course.StuSelectCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StuSelectcourse</servlet-name>
+    <url-pattern>/StuSelectcourse</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetMyCourse</servlet-name>
+    <servlet-class>contaller.Course.GetMyCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetMyCourse</servlet-name>
+    <url-pattern>/GetMyCourse</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeletMyCourse</servlet-name>
+    <servlet-class>contaller.Course.DeletCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletMyCourse</servlet-name>
+    <url-pattern>/DeletMyCourse</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>Getgrade</servlet-name>
+    <servlet-class>contaller.Course.Getgrade</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Getgrade</servlet-name>
+    <url-pattern>/Getgrade</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TLogin</servlet-name>
+    <servlet-class>contaller.Teacher.LoginTeacher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TLogin</servlet-name>
+    <url-pattern>/TLogin</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>TInfo</servlet-name>
+    <servlet-class>contaller.Teacher.TeacherInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TInfo</servlet-name>
+    <url-pattern>/TInfo</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>InertCourse</servlet-name>
+    <servlet-class>contaller.Course.InsertCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InertCourse</servlet-name>
+    <url-pattern>/InsertCourse</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>GetTeacherCourse</servlet-name>
+    <servlet-class>contaller.Course.GetTeacherCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTeacherCourse</servlet-name>
+    <url-pattern>/GetTeacherCourse</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TeacherInertCourse</servlet-name>
+    <servlet-class>contaller.Course.TeacherInsertCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TeacherInertCourse</servlet-name>
+    <url-pattern>/TeacherInertCourse</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ShowTeacherCourse</servlet-name>
+    <servlet-class>contaller.Course.ShowTeacherCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowTeacherCourse</servlet-name>
+    <url-pattern>/ShowTeacherCourse</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AdminLogin</servlet-name>
+    <servlet-class>contaller.Admin.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminLogin</servlet-name>
+    <url-pattern>/AdminLogin</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ShowTeachers</servlet-name>
+    <servlet-class>contaller.Teacher.ShowTeachers</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowTeachers</servlet-name>
+    <url-pattern>/ShowTeachers</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>InsertTeacher</servlet-name>
+    <servlet-class>contaller.Teacher.InsertTeacher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertTeacher</servlet-name>
+    <url-pattern>/InsertTeacher</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DeleteTeacher</servlet-name>
+    <servlet-class>contaller.Teacher.DeleteTeacher</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTeacher</servlet-name>
+    <url-pattern>/DeleteTeacher</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ShowStudents</servlet-name>
+    <servlet-class>contaller.Student.ShowStudents</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowStudents</servlet-name>
+    <url-pattern>/ShowStudents</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>InsertStudent</servlet-name>
+    <servlet-class>contaller.Student.InsertStudent</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InsertStudent</servlet-name>
+    <url-pattern>/InsertStudent</url-pattern>
+  </servlet-mapping>
+</web-app>

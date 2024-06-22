@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 绑定一个Dao/Mapper的接口-->
+<mapper namespace="MyBatisModel.dao.TeacherMapper">
+    <select id="login" resultType="MyBatisModel.pojo.LoginTeacher" parameterType="map">
+        SELECT * FROM tlogin WHERE tid=#{tid} AND `password` = #{pwd};
+    </select>
+
+    <!--获取教师基本信息-->
+    <select id="TeacherInfo" parameterType="String" resultType="MyBatisModel.pojo.Teachers">
+        SELECT * FROM teachers WHERE tid=#{tid};
+    </select>
+    <!--查看所有教师-->
+    <select id="showTeachers" resultType="MyBatisModel.pojo.Teachers">
+        select * from teachers;
+    </select>
+    <!--写入教师信息-->
+    <insert id="addTeacher" parameterType="map">
+        insert into teachers values (#{tid},#{tname},#{tsex},#{tbirth},#{taddress});
+    </insert>
+    <!--写入教师密码-->
+    <insert id="addTeacherPWD" parameterType="map">
+        insert into tlogin values (#{tid},#{tpwd});
+    </insert>
+    <!--删除教师-->
+    <delete id="deleteTeacher" parameterType="String">
+        delete from teachers where tid = #{tid}
+    </delete>
+</mapper>

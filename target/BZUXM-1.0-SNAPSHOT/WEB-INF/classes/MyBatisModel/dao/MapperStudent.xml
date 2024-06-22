@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace 绑定一个Dao/Mapper的接口-->
+<mapper namespace="MyBatisModel.dao.StudentMapper">
+    <cache eviction="FIFO"
+           flushInterval="60000"
+           size="512"
+           readOnly="true"
+    />
+    <select id="getStudent" resultType="MyBatisModel.pojo.Students" parameterType="String">
+        select * from bzuxm.students where sid=#{sid};
+    </select>
+
+    <select id="StudentLogin" resultType="MyBatisModel.pojo.LoginStudent" parameterType="map">
+        select * from bzuxm.slogin where sid = #{sid} and password = #{pwd};
+    </select>
+
+    <select id="StudentState" resultType="String" parameterType="String">
+        select sname from bzuxm.students where sid = #{sid}
+    </select>
+    <!--查询管理员接口-->
+    <select id="getAdmin" resultType="String" parameterType="map">
+        select id from admin where id = #{id} and password = #{pwd}
+    </select>
+    <!--查询所有学生-->
+    <select id="showStudent" resultType="MyBatisModel.pojo.Students">
+        SELECT * FROM students;
+    </select>
+    <!--添加学生-->
+    <insert id="InsertStudent" parameterType="map">
+        INSERT INTO students VALUES (#{sid},#{sname},#{ssex},#{sbirth},#{saddress})
+    </insert>
+    <!--添加密码-->
+    <insert id="InsertPWD" parameterType="map">
+        INSERT INTO slogin VALUES (#{sid},#{pwd})
+    </insert>
+</mapper>
