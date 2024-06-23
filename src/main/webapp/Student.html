@@ -170,7 +170,7 @@
     //状态
     const name = document.getElementById("statename")
     const ajax = new XMLHttpRequest();
-    ajax.open('GET','/Sstate',true)
+    ajax.open('GET','http://125.94.215.144:5012/BZUXM/Sstate',true)
     ajax.send()
     ajax.onreadystatechange = function (){
       if(ajax.readyState === 4){
@@ -187,7 +187,7 @@
     const ssex = document.getElementById("xinxi3")
     const birth = document.getElementById("xinxi4")
     const add = document.getElementById("xinxi5")
-    ajax2.open('GET','/SInfo',true)
+    ajax2.open('GET','http://125.94.215.144:5012/BZUXM/SInfo',true)
     ajax2.send()
     ajax2.onreadystatechange = function (){
       if(ajax2.readyState === 4){
@@ -207,7 +207,7 @@
 
     //我的成绩
     const ajax6 = new XMLHttpRequest();
-    ajax6.open('POST','/Getgrade',true);
+    ajax6.open('POST','http://125.94.215.144:5012/BZUXM/Getgrade',true);
     ajax6.send();
     ajax6.onreadystatechange = function(){
       if(ajax6.readyState === 4){
@@ -249,7 +249,7 @@
     //所有课程
     const ajax3 = new XMLHttpRequest()
     const kc = document.getElementById("kc")
-    ajax3.open('GET','/GCourse',true)
+    ajax3.open('GET','http://125.94.215.144:5012/BZUXM/GCourse',true)
     ajax3.send()
     ajax3.onreadystatechange = function(){
       if(ajax3.readyState === 4){
@@ -278,7 +278,7 @@
     document.getElementById('mykc').innerHTML = '';
     //我选择的课程
     const ajax5 = new XMLHttpRequest();
-    ajax5.open('GET','/GetMyCourse',true)
+    ajax5.open('GET','http://125.94.215.144:5012/BZUXM/GetMyCourse',true)
     ajax5.send()
     ajax5.onreadystatechange = function (){
       if(ajax5.readyState === 4){
@@ -354,7 +354,7 @@
         date.append(key,params[key])
       }
 
-      ajax4.open('POST','/StuSelectcourse',true)
+      ajax4.open('POST','http://125.94.215.144:5012/BZUXM/StuSelectcourse',true)
       ajax4.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
       ajax4.send(date);
 
@@ -382,7 +382,7 @@
       for(const key in params){
         date.append(key,params[key])
       }
-      ajax5.open('POST','/DeletMyCourse',true)
+      ajax5.open('POST','http://125.94.215.144:5012/BZUXM/DeletMyCourse',true)
       ajax5.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
       ajax5.send(date)
       ajax5.onreadystatechange = function(){

@@ -194,7 +194,7 @@
         const add = document.getElementById("xinxi5")
         const name = document.getElementById("statename")
         const ajax = new XMLHttpRequest()
-        ajax.open('GET','/TInfo',true)
+        ajax.open('GET','http://125.94.215.144:5012/BZUXM/TInfo',true)
         ajax.send()
         ajax.onreadystatechange = function(){
             if(ajax.readyState === 4){
@@ -229,7 +229,7 @@
         for(const key in params){
             date.append(key,params[key])
         }
-        ajax.open('POST','/InsertCourse',true)
+        ajax.open('POST','http://125.94.215.144:5012/BZUXM/InsertCourse',true)
         //ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded")
         ajax.send(date)
 
@@ -248,7 +248,7 @@
         var parentContainer = document.getElementById('kj');
         parentContainer.innerHTML = ' '
         const ajax3 = new XMLHttpRequest();
-        ajax3.open('GET','/GetTeacherCourse',true)
+        ajax3.open('GET','http://125.94.215.144:5012/BZUXM/GetTeacherCourse',true)
         ajax3.send()
         ajax3.onreadystatechange = function(){
             if(ajax3.readyState === 4){
@@ -356,7 +356,7 @@
                     data.append(key,params[key])
                 }
 
-                ajax4.open('POST','/TeacherInertCourse',true)
+                ajax4.open('POST','http://125.94.215.144:5012/BZUXM/TeacherInertCourse',true)
                 ajax4.send(data);
                 ajax4.onreadystatechange = function(){
                     if(ajax4.readyState === 4){
@@ -375,7 +375,7 @@
     top4.onclick = function(){
         father.innerHTML = ' ';
         const ajax5 = new XMLHttpRequest()
-        ajax5.open('GET','/ShowTeacherCourse',true);
+        ajax5.open('GET','http://125.94.215.144:5012/BZUXM/ShowTeacherCourse',true);
         ajax5.send();
         ajax5.onreadystatechange = function(){
             if(ajax5.readyState === 4){

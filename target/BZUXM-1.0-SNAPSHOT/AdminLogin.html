@@ -113,7 +113,7 @@
       data.append(key,params[key])
     }
     const ajax = new XMLHttpRequest();
-    ajax.open("POST",'/AdminLogin',true)
+    ajax.open("POST",'http://125.94.215.144:5012/BZUXM/AdminLogin',true)
     ajax.send(data)
     ajax.onreadystatechange = function(){
       if(ajax.readyState === 4){

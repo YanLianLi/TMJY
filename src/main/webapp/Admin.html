@@ -273,7 +273,7 @@
     let father = document.getElementById("tfather")
     father.innerHTML = ' ';
     let ajax = new XMLHttpRequest()
-    ajax.open('GET','/ShowTeachers',true);
+    ajax.open('GET','http://125.94.215.144:5012/BZUXM/ShowTeachers',true);
     ajax.send();
     ajax.onreadystatechange = function(){
       if(ajax.readyState === 4){
@@ -341,7 +341,7 @@
       data.append(key,params[key])
     }
     let ajax = new XMLHttpRequest()
-    ajax.open('POST','/InsertTeacher',true)
+    ajax.open('POST','http://125.94.215.144:5012/BZUXM/InsertTeacher',true)
     ajax.send(data)
     ajax.onreadystatechange = function(){
       if(ajax.readyState === 4){
@@ -360,7 +360,7 @@
     let ajax = new XMLHttpRequest();
     let data = new URLSearchParams();
     data.append("tid",tid);
-    ajax.open('POST','/DeleteTeacher',true)
+    ajax.open('POST','http://125.94.215.144:5012/BZUXM/DeleteTeacher',true)
     ajax.onreadystatechange = function(){
       if(ajax.readyState === 4){
         if(ajax.status/100 === 2){
@@ -379,7 +379,7 @@
   btn10.onclick = function(){
     father1.innerHTML = " "
     let ajax = new XMLHttpRequest()
-    ajax.open('GET','/ShowStudents',true)
+    ajax.open('GET','http://125.94.215.144:5012/BZUXM/ShowStudents',true)
     ajax.send()
     ajax.onreadystatechange = function(){
       if(ajax.readyState === 4){
@@ -448,7 +448,7 @@
       data.append(key,params[key])
     }
     let ajax2 = new XMLHttpRequest();
-    ajax2.open('POST','/InsertStudent',true)
+    ajax2.open('POST','http://125.94.215.144:5012/BZUXM/InsertStudent',true)
     ajax2.send(data)
     ajax2.onreadystatechange = function(){
       if(ajax2.readyState === 4){
